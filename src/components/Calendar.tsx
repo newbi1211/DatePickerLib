@@ -78,26 +78,30 @@ const Calendar = ({
           startDate.getFullYear() === tempDate.getFullYear() &&
           startDate.getMonth() === tempDate.getMonth() &&
           startDate.getDate() === tempDate.getDate()
-            ? `bg(#749d5f) c(white) transition-property(border-radius) ${
-                startDate && endDate && startDate != endDate ? "onStart" : ""
+            ? `bg(#749d5f) c(white)! transition-property(border-radius) transition-duration(0.1s) ${
+                startDate && endDate && startDate != endDate ? "rr(0)!" : ""
               }`
-            : "";
+            : "c(black)";
         const isEnd =
           endDate &&
           endDate.getFullYear() === tempDate.getFullYear() &&
           endDate.getMonth() === tempDate.getMonth() &&
           endDate.getDate() === tempDate.getDate()
-            ? `calendar__selected--end ${
-                startDate && endDate && startDate != endDate ? "onEnd" : ""
+            ? `bg(#749d5f) c(white)! transition-property(border-radius) transition-duration(0.1s) ${
+                startDate && endDate && startDate != endDate ? "rl(0)!" : ""
               }`
+            : "c(black)";
+        const isRange =
+          startDate && endDate && startDate < tempDate && tempDate < endDate
+            ? "bg(#d3d3d3)! r(0)! transition-duration(0s)!"
             : "";
         dates.push(
           <div
             key={i}
             onClick={() => onClickDate(currentDate, i)}
-            className={`w(30) h(30) pack c(black) r(50%) pointer user-select-none ${isToday}`}
+            className={`w(30) h(30) pb(2) pack r(50%) pointer user-select-none hover:bg(#749d5f)! hover:c(white)! transition-property(background, color) transition-duration(0.2s) ${isToday} ${isStart} ${isEnd} ${isRange}`}
           >
-            <span className="font(10) 500 items-center">{i + 1}</span>
+            <span className="font(10) 500">{i + 1}</span>
           </div>
         );
       } else {
