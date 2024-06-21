@@ -1,14 +1,14 @@
-import "@adorable.css";
-
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-import DatePicker from "./components/DatePicker";
-import Test from "./Test";
+import DatePicker from "./lib/components/DatePicker";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* <DatePicker isOpened={true} /> */}
-    <Test />
+    <DatePicker
+      isOpen={true}
+      setIsOpen={1}
+      returnEndDate={1}
+      returnStareDate={1}
+    ></DatePicker>
   </React.StrictMode>
 );

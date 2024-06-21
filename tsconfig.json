@@ -5,21 +5,33 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "baseUrl": "./",
+    "paths": {
+      "*": ["@types/*"]
+    },
+    "declarationDir": "./types",
+    "allowJs": true,
+    "removeComments": false,
+    "types": ["node"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "declaration": true,
+    "outDir": "./dist" //node_modules/@types/podo-datepicker-component/declarations.d.ts
   },
-  "include": ["src"],
+  "include": ["src", "declarations.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
