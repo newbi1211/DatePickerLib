@@ -61,16 +61,14 @@ const QuickSelector = ({
 
   const isActive = (sDate: Date, eDate: Date) => {
     const temp =
-      startDate &&
-      startDate.getFullYear() === sDate.getFullYear() &&
-      startDate.getMonth() === sDate.getMonth() &&
-      startDate.getDate() === sDate.getDate() &&
-      endDate &&
-      endDate.getFullYear() === eDate.getFullYear() &&
-      endDate.getMonth() === eDate.getMonth() &&
-      endDate.getDate() === eDate.getDate()
-        ? true
-        : false;
+      !!(startDate &&
+          startDate.getFullYear() === sDate.getFullYear() &&
+          startDate.getMonth() === sDate.getMonth() &&
+          startDate.getDate() === sDate.getDate() &&
+          endDate &&
+          endDate.getFullYear() === eDate.getFullYear() &&
+          endDate.getMonth() === eDate.getMonth() &&
+          endDate.getDate() === eDate.getDate());
 
     return temp;
   };
@@ -84,49 +82,49 @@ const QuickSelector = ({
       }}
     >
       <QuickSelectorItem
-        isActive={isActive(toDay, toDay)}
+        $isActive={isActive(toDay, toDay)}
         onClick={() => onClickSelector(toDay, toDay)}
       >
         오늘
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(yesterDay, yesterDay)}
+        $isActive={isActive(yesterDay, yesterDay)}
         onClick={() => onClickSelector(yesterDay, yesterDay)}
       >
         어제
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(thisWeek[0], thisWeek[1])}
+        $isActive={isActive(thisWeek[0], thisWeek[1])}
         onClick={() => onClickSelector(thisWeek[0], thisWeek[1])}
       >
         이번주
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(lastWeek[0], lastWeek[1])}
+        $isActive={isActive(lastWeek[0], lastWeek[1])}
         onClick={() => onClickSelector(lastWeek[0], lastWeek[1])}
       >
         지난주
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(thisMonth[0], thisMonth[1])}
+        $isActive={isActive(thisMonth[0], thisMonth[1])}
         onClick={() => onClickSelector(thisMonth[0], thisMonth[1])}
       >
         이번달
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(lastMonth[0], lastMonth[1])}
+        $isActive={isActive(lastMonth[0], lastMonth[1])}
         onClick={() => onClickSelector(lastMonth[0], lastMonth[1])}
       >
         지난달
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(thisYear[0], thisYear[1])}
+        $isActive={isActive(thisYear[0], thisYear[1])}
         onClick={() => onClickSelector(thisYear[0], thisYear[1])}
       >
         올해
       </QuickSelectorItem>
       <QuickSelectorItem
-        isActive={isActive(lastYear[0], lastYear[1])}
+        $isActive={isActive(lastYear[0], lastYear[1])}
         onClick={() => onClickSelector(lastYear[0], lastYear[1])}
       >
         작년
@@ -137,7 +135,11 @@ const QuickSelector = ({
 
 export default QuickSelector;
 
-const QuickSelectorItem = styled.div<{ isActive: boolean }>`
+interface QuickSelectorItemProps {
+  $isActive: boolean;
+}
+
+const QuickSelectorItem = styled.div<QuickSelectorItemProps>`
   cursor: pointer;
   width: 90px;
   height: 35px;
@@ -153,6 +155,6 @@ const QuickSelectorItem = styled.div<{ isActive: boolean }>`
   &:hover {
     background: #d8d8d87d;
   }
-  background: ${(props) => (props.isActive ? "#749d5f !important" : "unset")};
-  color: ${(props) => (props.isActive ? "white !important" : "#8a8c8e")};
+  background: ${({$isActive}) => ($isActive ? "#749d5f !important" : "unset")};
+  color: ${({$isActive}) => ($isActive ? "white !important" : "#8a8c8e")};
 `;

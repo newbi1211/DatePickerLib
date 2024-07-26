@@ -89,16 +89,14 @@ const Calendar = ({
               : 1
             : 0;
         const isRange =
-          startDate && endDate && startDate < tempDate && tempDate < endDate
-            ? true
-            : false;
+          !!(startDate && endDate && startDate < tempDate && tempDate < endDate);
         dates.push(
           <DatesItem
             key={i}
-            isToday={isToday}
-            isStart={isStart}
-            isEnd={isEnd}
-            isRange={isRange}
+            $isToday={isToday}
+            $isStart={isStart}
+            $isEnd={isEnd}
+            $isRange={isRange}
             onClick={() => onClickDate(currentDate, i)}
           >
             <span style={{ fontSize: "10px", fontWeight: "500" }}>{i + 1}</span>
@@ -153,10 +151,10 @@ const Calender = styled.div`
 `;
 
 interface DateProps {
-  isToday: boolean;
-  isStart: number;
-  isEnd: number;
-  isRange: boolean;
+  $isToday: boolean;
+  $isStart: number;
+  $isEnd: number;
+  $isRange: boolean;
 }
 
 const DatesItem = styled.div<DateProps>`
@@ -168,40 +166,40 @@ const DatesItem = styled.div<DateProps>`
   user-select: none;
   -webkit-user-select: none;
   cursor: pointer;
-  /* border-radius: 50%; */
   color: #000;
   transition-duration: 0.2s;
   transition-property: background, color;
+  /* border-radius: 50%; */
   &:hover {
     background: #749d5f !important;
     color: white !important;
   }
 
-  box-sizing: ${(props) => (props.isToday ? "border-box" : "unset")};
-  border: ${(props) => (props.isToday ? "1px solid #749d5f" : "none")};
+  box-sizing: ${({$isToday}) => ($isToday ? "border-box" : "unset")};
+  border: ${({$isToday}) => ($isToday ? "1px solid #749d5f" : "none")};
 
-  background: ${(props) =>
-    props.isStart > 0 || props.isEnd > 0 ? "#749d5f" : "none"};
-  color: ${(props) =>
-    props.isStart > 0 || props.isEnd > 0 ? "white !important" : ""};
-  transition-property: ${(props) =>
-    props.isStart > 0 || props.isEnd > 0 ? "border-radius" : "none"};
-  transition-duration: ${(props) =>
-    props.isStart > 0 || props.isEnd > 0 ? "0.1s" : "none"};
+  background: ${({$isStart, $isEnd}) =>
+    $isStart > 0 || $isEnd > 0 ? "#749d5f" : "none"};
+  color: ${({$isStart, $isEnd}) =>
+    $isStart > 0 || $isEnd > 0 ? "white !important" : ""};
+  transition-property: ${({$isStart, $isEnd}) =>
+    $isStart > 0 || $isEnd > 0 ? "border-radius" : "none"};
+  transition-duration: ${({$isStart, $isEnd}) =>
+    $isStart > 0 || $isEnd > 0 ? "0.1s" : "none"};
 
-  border-top-right-radius: ${(props) =>
-    props.isStart > 1 ? "0 !important" : "50%"};
-  border-bottom-right-radius: ${(props) =>
-    props.isStart > 1 ? "0 !important" : "50%"};
+  border-top-right-radius: ${({$isStart}) =>
+    $isStart > 1 ? "0 !important" : "50%"};
+  border-bottom-right-radius: ${({$isStart}) =>
+    $isStart > 1 ? "0 !important" : "50%"};
 
-  border-top-left-radius: ${(props) =>
-    props.isEnd > 1 ? "0 !important" : "50%"};
-  border-bottom-left-radius: ${(props) =>
-    props.isEnd > 1 ? "0 !important" : "50%"};
+  border-top-left-radius: ${({$isEnd}) =>
+    $isEnd > 1 ? "0 !important" : "50%"};
+  border-bottom-left-radius: ${({$isEnd}) =>
+    $isEnd > 1 ? "0 !important" : "50%"};
 
-  background: ${(props) => (props.isRange ? "#d3d3d3 !important" : "")};
-  border-radius: ${(props) => (props.isRange ? "0 !important" : "")};
-  transition-duration: ${(props) => (props.isRange ? "0s !important" : "")};
+  background: ${({$isRange}) => ($isRange ? "#d3d3d3 !important" : "")};
+  border-radius: ${({$isRange}) => ($isRange ? "0 !important" : "")};
+  transition-duration: ${({$isRange}) => ($isRange ? "0s !important" : "")};
 
   &:active {
     opacity: 0.7;

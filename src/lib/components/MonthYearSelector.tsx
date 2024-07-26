@@ -36,15 +36,15 @@ const MonthYearSelector = ({
     setModalPosition(position);
   };
 
-  const onClcikBack = () => {
+  const onClickBack = () => {
     setModalOpen(false);
   };
 
   return (
     <Wrap>
       <ModalBackground
-        isOpen={modalOpen}
-        onClick={onClcikBack}
+        $isOpen={modalOpen}
+        onClick={onClickBack}
       ></ModalBackground>
       <MonthYearModal
         currentDate={
@@ -57,9 +57,9 @@ const MonthYearSelector = ({
         isOpen={modalOpen}
         setIsOpen={setModalOpen}
       />
-      <LeftRightRrrow onClick={onClickLeftArrow}>
+      <LeftRightArrow onClick={onClickLeftArrow}>
         <LeftArrow />
-      </LeftRightRrrow>
+      </LeftRightArrow>
       <div
         style={{
           marginRight: "30px",
@@ -90,9 +90,9 @@ const MonthYearSelector = ({
           월
         </Monthviewer>
       </div>
-      <LeftRightRrrow onClick={onClickRightArrow}>
+      <LeftRightArrow onClick={onClickRightArrow}>
         <RightArrow />
-      </LeftRightRrrow>
+      </LeftRightArrow>
     </Wrap>
   );
 };
@@ -112,14 +112,18 @@ const Wrap = styled.div`
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 `;
 
-const LeftRightRrrow = styled.div`
+const LeftRightArrow = styled.div`
   cursor: pointer;
   &:hover {
     filter: brightness(0.5);
   }
 `;
 
-const ModalBackground = styled.div<{ isOpen: boolean }>`
+interface ModalBackgroundProps {
+    $isOpen: boolean;
+}
+
+const ModalBackground = styled.div<ModalBackgroundProps>`
   width: 528px;
   height: 315px;
   position: absolute;
@@ -129,7 +133,7 @@ const ModalBackground = styled.div<{ isOpen: boolean }>`
   background: #ffffff;
   opacity: 0.5;
   border-radius: 6px;
-  display: ${(props) => (props.isOpen ? "" : "none")};
+  display: ${({$isOpen}) => ($isOpen ? "" : "none")};
 `;
 
 const Monthviewer = styled.div`

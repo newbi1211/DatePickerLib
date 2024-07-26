@@ -28,10 +28,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
 
     "declaration": true,
-    "outDir": "./dist" //node_modules/@types/podo-datepicker-component/declarations.d.ts
+    "emitDeclarationOnly": true,
+    "outDir": "./dist" //node_modules/@types/podo-datepicker-component/declarations.d.
   },
-  "include": ["src", "declarations.d.ts"],
+  "include": ["src", "./declarations.d.ts", "src/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

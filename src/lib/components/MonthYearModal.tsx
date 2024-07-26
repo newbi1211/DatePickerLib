@@ -83,11 +83,9 @@ const MonthYearModal = ({
       if (i <= 12) {
         render.push(
           <Month
-            isThis={
+            $isThis={
               currentDate.getFullYear() === tempDate.getFullYear() &&
-              i === currentDate.getMonth() + 1
-                ? true
-                : false
+                i === currentDate.getMonth() + 1
             }
             key={i}
             onClick={() => onClickMonth(i)}
@@ -192,7 +190,7 @@ const MonthYearModal = ({
   };
 
   return (
-    <MonthYearWrap isLeft={isLeft} isOpen={isOpen}>
+    <MonthYearWrap $isLeft={isLeft} $isOpen={isOpen}>
       {modalRender()}
     </MonthYearWrap>
   );
@@ -201,8 +199,8 @@ const MonthYearModal = ({
 export default MonthYearModal;
 
 interface OpenAndPosition {
-  isLeft: boolean;
-  isOpen: boolean;
+  $isLeft: boolean;
+  $isOpen: boolean;
 }
 
 const MonthYearWrap = styled.div<OpenAndPosition>`
@@ -215,9 +213,9 @@ const MonthYearWrap = styled.div<OpenAndPosition>`
   height: 280px;
   width: 200px;
   top: -5px;
-  left: ${(props) => (props.isLeft ? 0 : "unset")};
-  right: ${(props) => (!props.isLeft ? 0 : "unset")};
-  display: ${(props) => (props.isOpen ? "" : "none")};
+  left: ${({$isLeft}) => ($isLeft ? 0 : "unset")};
+  right: ${({$isLeft}) => (!$isLeft ? 0 : "unset")};
+  display: ${({$isOpen}) => ($isOpen ? "" : "none")};
 `;
 
 const MonthReader = styled.div`
@@ -306,7 +304,11 @@ const YearExtra = styled.div`
   height: 35px;
 `;
 
-const Month = styled.div<{ isThis: boolean }>`
+interface MonthProps {
+  $isThis: boolean;
+}
+
+const Month = styled.div<MonthProps>`
   user-select: none;
   -webkit-user-select: none;
   display: flex;
@@ -319,8 +321,8 @@ const Month = styled.div<{ isThis: boolean }>`
   cursor: pointer;
   border-radius: 50%;
   font-weight: 600;
-  box-sizing: ${(props) => (props.isThis ? "border-box" : "")};
-  border: ${(props) => (props.isThis ? "0.25px solid #749d5f" : "")};
+  box-sizing: ${({$isThis}) => ($isThis ? "border-box" : "")};
+  border: ${({$isThis}) => ($isThis ? "0.25px solid #749d5f" : "")};
   &:hover {
     background: #749d5f !important;
     color: #ffffff !important;

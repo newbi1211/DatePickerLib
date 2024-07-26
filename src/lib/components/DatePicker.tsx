@@ -14,8 +14,8 @@ const DatePicker = ({
 }: {
   isOpen: boolean;
   // setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  // returnStartDate: React.Dispatch<React.SetStateAction<any>>;
-  // returnEndDate: React.Dispatch<React.SetStateAction<any>>;
+  // returnStartDate: React.Dispatch<React.SetStateAction<Date>>;
+  // returnEndDate: React.Dispatch<React.SetStateAction<Date>>;
   setIsOpen: any;
   returnStartDate: any;
   returnEndDate: any;
@@ -47,7 +47,7 @@ const DatePicker = ({
   };
 
   return (
-    <DatePickerWrap isOpen={isOpen}>
+    <DatePickerWrap $isOpen={isOpen}>
       <div style={{ display: "flex", flexFlow: "row" }}>
         <QuickSelector
           startDate={startDate}
@@ -94,7 +94,11 @@ const DatePicker = ({
 
 export default DatePicker;
 
-const DatePickerWrap = styled.div<{ isOpen: boolean }>`
+interface DatePickerWrapProps {
+  $isOpen: boolean;
+}
+
+const DatePickerWrap = styled.div<DatePickerWrapProps>`
   border: 1px solid #d3d3d3;
   border-radius: 6px;
   padding: 10px 0;
@@ -103,7 +107,7 @@ const DatePickerWrap = styled.div<{ isOpen: boolean }>`
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  display: ${(props) => (props.isOpen ? "" : "none")};
+  display: ${({$isOpen}) => ($isOpen ? "" : "none")};
   background-color: white;
 `;
 
